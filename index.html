@@ -34,13 +34,12 @@ body::before {
 
 /* Scene */
 .scene {
-    width: 50vw;
-    height: 50vw;
-    max-width: 250px;
-    max-height: 250px;
-    perspective: 900px;
+    width: 60vw;
+    height: 60vw;
+    max-width: 280px;
+    max-height: 280px;
+    perspective: 800px;
 }
-
 /* Cube */
 .cube {
     width: 100%;
@@ -55,19 +54,24 @@ body::before {
     position: absolute;
     width: 100%;
     height: 100%;
-    border: 2px solid #fff;
-    border-radius: 10px;
-    background-size: cover;
-    background-position: center;
+    
+    background-size: cover;      /* FIX */
+    background-position: center; /* FIX */
+    background-repeat: no-repeat;
+
+    box-sizing: border-box;
+    backface-visibility: hidden;
+    border: none;
+     border-radius: 10px;
 }
 
 /* Mobile depth */
-.front  { transform: rotateY(0deg) translateZ(25vw); }
-.back   { transform: rotateY(180deg) translateZ(25vw); }
-.right  { transform: rotateY(90deg) translateZ(25vw); }
-.left   { transform: rotateY(-90deg) translateZ(25vw); }
-.top    { transform: rotateX(90deg) translateZ(25vw); }
-.bottom { transform: rotateX(-90deg) translateZ(25vw); }
+.front  { transform: rotateY(0deg) translateZ(28.5vw); }
+.back   { transform: rotateY(180deg) translateZ(28.5vw); }
+.right  { transform: rotateY(90deg) translateZ(28.5vw); }
+.left   { transform: rotateY(-90deg) translateZ(28.5vw); }
+.top    { transform: rotateX(90deg) translateZ(28.5vw); }
+.bottom { transform: rotateX(-90deg) translateZ(28.5vw); }
 
 /* Animation */
 @keyframes rotateCube {
@@ -93,26 +97,24 @@ body {
     position: relative; /* IMPORTANT */
 }
 .birthday-text {
-    position: absolute;
+    position: fixed;
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
+    width: 90%;
+
     text-align: center;
-
-    font-size: 7vw;
+    font-size: 6vw;
+    color: white;
     font-weight: bold;
-    color: #fff;
 
-    /* Strong glow */
+    z-index: 20; /* increase */
+
     text-shadow: 
-        0 0 5px #ff4da6,
         0 0 10px #ff4da6,
         0 0 20px #ff4da6,
         0 0 40px #ff4da6;
-
-    z-index: 10;
 }
-
 /* Desktop fix */
 @media (min-width: 768px) {
     .birthday-text {
@@ -141,10 +143,18 @@ body {
 }
 #playBtn {
     position: fixed;
-    bottom: 60px;   /* upar shift */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
+    bottom: 15px;
+    left: 15px;   /* LEFT side */
+
+    padding: 8px 15px;
+    font-size: 14px;
+
+    border: none;
+    border-radius: 20px;
+    background: #ff4da6;
+    color: white;
+
+    z-index: 20;
 }
 
 
@@ -155,18 +165,18 @@ body {
     }
 }
 .credit {
-    text-shadow: 0 0 5px #3f06bb, 0 0 10px #ff4da6;
-    opacity: 0.6;.credit {
     position: fixed;
-    bottom: 10px;
-    right: 15px;
+    bottom: 15px;
+    right: 15px;  /* RIGHT side */
+
     text-align: right;
-    z-index: 10;
-    font-size: 12px;
-    color: white;
-    opacity: 0.8;
+    font-size: 11px;
+    color: rgb(17, 10, 224);
+
+    z-index: 20;
+    opacity: 0.9;
 }
-}
+
 </style>
 
 </head>
