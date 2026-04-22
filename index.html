@@ -176,7 +176,17 @@ body {
     z-index: 20;
     opacity: 0.9;
 }
-
+#startScreen {
+    position: fixed;
+    inset: 0;
+    background: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    z-index: 999;
+}
 </style>
 
 </head>
@@ -200,43 +210,29 @@ body {
 
     </div>
 </div>
+<div id="startScreen">Tap Anywhere 💖</div>
   <p class="credit">Software Engineer<br> 
       AKASH RAUT[UI/UX]</p>
 <script>
-   
-   
-const music = document.getElementById("bgMusic");
-const btn = document.getElementById("playBtn");
+window.addEventListener("DOMContentLoaded", function () {
 
-btn.addEventListener("click", () => {
-    if (music.paused) {
-        music.play();
-        btn.innerText = "⏸ Pause";
-    } else {
-        music.pause();
-        btn.innerText = "🎵 Play Music";
-    }
-});
-
-
-
-window.onload = function () {
-
-    // 🎵 MUSIC
     const music = document.getElementById("bgMusic");
-    const btn = document.getElementById("playBtn");
+    const screen = document.getElementById("startScreen");
+    const cube = document.getElementById("cube");
 
-    btn.addEventListener("click", () => {
-        if (music.paused) {
-            music.play();
-            btn.innerText = "⏸ Pause";
-        } else {
-            music.pause();
-            btn.innerText = "🎵 Play Music";
-        }
-    });
+    // 🎵 START MUSIC ON TAP
+    function startMusic() {
+        music.play().then(() => {
+            screen.style.display = "none";
+        }).catch(() => {
+            alert("Tap again to start music");
+        });
+    }
 
-    // ✍️ TYPING TEXT
+    screen.addEventListener("click", startMusic);
+    screen.addEventListener("touchstart", startMusic);
+
+    // ✍️ Typing Text
     const text = "Happy Birthday Akanksha Babu 💖";
     let i = 0;
     const el = document.querySelector(".birthday-text");
@@ -252,17 +248,20 @@ window.onload = function () {
     el.innerHTML = "";
     typeWriter();
 
-};
+    // 🎲 Cube Speed Toggle
+    let speed = 8;
+    cube.addEventListener("click", () => {
+        speed = speed === 8 ? 3 : 8;
+        cube.style.animation = `rotateCube ${speed}s infinite linear`;
+    });
 
-cube.addEventListener("click", () => {
-    speed = speed === 8 ? 3 : 8;
-    cube.style.animation = `rotateCube ${speed}s infinite linear`;
 });
 
+// 🎉 Emoji Animation
 function createEmoji() {
     const emoji = document.createElement("div");
-
     const emojis = ["🎂","🎉","🎈","💖","✨"];
+
     emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
 
     emoji.style.position = "fixed";
@@ -288,10 +287,8 @@ function createEmoji() {
     }, 20);
 }
 
-// continuous effect
 setInterval(createEmoji, 300);
 </script>
-
 
 </body>
 </html>
