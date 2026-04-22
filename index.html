@@ -94,24 +94,23 @@ body {
 }
 .birthday-text {
     position: absolute;
-    top: 20px;        /* upar fix */
+    top: 20px;
     left: 50%;
-    transform: translateX(-50%); /* perfectly center */
-    
-    font-size: 6vw;
-    color: #fff;
-    font-weight: bold;
-    letter-spacing: 2px;
+    transform: translateX(-50%);
     text-align: center;
 
-    z-index: 10;
+    font-size: 7vw;
+    font-weight: bold;
+    color: #fff;
 
+    /* Strong glow */
     text-shadow: 
+        0 0 5px #ff4da6,
         0 0 10px #ff4da6,
         0 0 20px #ff4da6,
-        0 0 30px #ff4da6;
+        0 0 40px #ff4da6;
 
-    animation: floatText 3s infinite ease-in-out;
+    z-index: 10;
 }
 
 /* Desktop fix */
@@ -141,30 +140,13 @@ body {
     }
 }
 #playBtn {
-    position: absolute;
-    bottom: 20px;
+    position: fixed;
+    bottom: 60px;   /* upar shift */
     left: 50%;
     transform: translateX(-50%);
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 20px;
-    background: #ff4da6;
-    color: white;
-    cursor: pointer;
     z-index: 10;
 }
-.credit {
-    position: fixed;
-    bottom: 10px;
-    right: 15px;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-    opacity: 0.8;
-    z-index: 10;
-    letter-spacing: 1px;
-}
+
 
 /* Mobile friendly */
 @media (min-width: 768px) {
@@ -174,7 +156,16 @@ body {
 }
 .credit {
     text-shadow: 0 0 5px #3f06bb, 0 0 10px #ff4da6;
-    opacity: 0.6;
+    opacity: 0.6;.credit {
+    position: fixed;
+    bottom: 10px;
+    right: 15px;
+    text-align: right;
+    z-index: 10;
+    font-size: 12px;
+    color: white;
+    opacity: 0.8;
+}
 }
 </style>
 
@@ -218,22 +209,39 @@ btn.addEventListener("click", () => {
 });
 
 
+
 window.onload = function () {
+
+    // 🎵 MUSIC
+    const music = document.getElementById("bgMusic");
+    const btn = document.getElementById("playBtn");
+
+    btn.addEventListener("click", () => {
+        if (music.paused) {
+            music.play();
+            btn.innerText = "⏸ Pause";
+        } else {
+            music.pause();
+            btn.innerText = "🎵 Play Music";
+        }
+    });
+
+    // ✍️ TYPING TEXT
     const text = "Happy Birthday Akanksha Babu 💖";
     let i = 0;
-    const speed = 100;
     const el = document.querySelector(".birthday-text");
 
     function typeWriter() {
         if (i < text.length) {
             el.innerHTML += text.charAt(i);
             i++;
-            setTimeout(typeWriter, speed);
+            setTimeout(typeWriter, 80);
         }
     }
 
-    el.innerHTML = ""; // reset
+    el.innerHTML = "";
     typeWriter();
+
 };
 
 cube.addEventListener("click", () => {
